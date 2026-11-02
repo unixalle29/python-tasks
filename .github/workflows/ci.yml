@@ -19,22 +19,16 @@ jobs:
           python-version: "3.11"
           enable-cache: true
 
-      - name: Install Qt system libraries
-        run: |
+      - run: |
           sudo apt-get update
           sudo apt-get install -y libegl1 libgl1 libxkbcommon0 libxkbcommon-x11-0
 
-      - name: Install dependencies
-        run: uv sync --locked
+      - run: uv sync --locked
 
-      - name: Ruff
-        run: uv run ruff check .
+      - run: uv run ruff check .
 
-      - name: Ruff format
-        run: uv run ruff format --check .
+      - run: uv run ruff format --check .
 
-      - name: Mypy
-        run: uv run mypy
+      - run: uv run mypy
 
-      - name: Pytest
-        run: uv run pytest --cov=python_tasks --cov-report=term-missing
+      - run: uv run pytest --cov=python_tasks --cov-report=term-missing
